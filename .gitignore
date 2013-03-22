@@ -16,3 +16,8 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+#EC2 & S3 files
+aws.yml
+s3.yml
+.DS_Store
