@@ -14,6 +14,8 @@ end
 gem 'jquery-rails'
 gem "therubyracer"
 gem "less-rails"
+gem "i18n"
+gem "twitter"
 gem "twitter-bootstrap-rails"
 gem 'aws-sdk'
 
