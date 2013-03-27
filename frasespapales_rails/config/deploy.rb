@@ -7,6 +7,7 @@ set :application, "frasespapales"
 
 # The directory on the EC2 node that will be deployed to
 set :deploy_to, "/var/www/#{application}"
+actual_release_path = "#{release_path}/frasespapales_rails"
 
 # Your EC2 instances. Use the ec2-xxx....amazonaws.com hostname, not
 # any other name (in case you have your own DNS alias) or it won't
@@ -37,25 +38,34 @@ set :rvm_install_ruby_params, '1.9.3 --with-gcc=clang'      # for jruby/rbx defa
 #before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 #before 'deploy:setup', 'rvm:import_gemset' # import gemset from file
 
-after 'deploy:setup', 'copy_secret_files'
-after 'deploy:setup', 'precompile'
-after 'deploy:setup', 'restart_server'
-
-task :copy_secret_files, :role => :web do
-    # whatever you need to do
-    run "cp -f database.yml #{release_path}/config/database.yml"
-    run "cp -f aws.yml #{release_path}/config/aws.yml"
-    run "cp -f s3.yml #{release_path}/config/s3.yml"
+namespace :deploy do
+    task :build_gems, :role => :web do
+        logger.info "Building gems"
+        run "cd #{actual_release_path} && rvmsudo bundle install"
+    end
     
+    task :copy_secret_files, :role => :web do
+        logger.info "Copying secret files"
+        top.upload(File.expand_path("../database.yml", __FILE__), "#{actual_release_path}/config/database.yml")
+        top.upload(File.expand_path("../aws.yml", __FILE__), "#{actual_release_path}/config/aws.yml")
+        top.upload(File.expand_path("../s3.yml", __FILE__), "#{actual_release_path}/config/s3.yml")
+    end
+    
+    task :precompile, :role => :web do
+        logger.info "Precompiling for deployment"
+        run "cd #{actual_release_path}/ && rake assets:precompile"
+    end
+    
+    task :restart_server do
+        logger.info "Finished. Restarting apache"
+        run "touch #{current_path}/tmp/restart.txt"
+    end
 end
 
-task :precompile, :role => :web do
-    run "cd #{release_path}/ && rake assets:precompile"
-end
-
-task :restart_server, :role => :web do
-    run "rvmsudo apachectl restart"
-end
+after 'deploy:finalize_update', 'deploy:build_gems'
+after 'deploy:finalize_update', 'deploy:copy_secret_files'
+after 'deploy:finalize_update', 'deploy:precompile'
+# TODO: after 'deploy:finalize_update', 'deploy:restart_server'
 
 
 
