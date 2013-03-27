@@ -1,4 +1,0 @@
-<script type="text/javascript">alert("escapa bien las variables damian");</script>
-asASDAS
-Que significa "... de one ..." ? (by Damian Ferrai)
-Los sueldos de Teracode lo paga Dios.

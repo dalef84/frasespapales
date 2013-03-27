@@ -17,13 +17,11 @@ role :db,       "ec2-54-232-196-174.sa-east-1.compute.amazonaws.com", :primary =
 
 default_run_options[:pty] = true
 
-set :user, "ec2-user"
+set :user, "admin"
 set :admin_runner, "admin"
-
-set :ssh_options, {:user => "ec2-user" }
-
+set :ssh_options, {:user => "admin" }
 set :ssh_options, {:auth_methods => "publickey"}
-set :ssh_options, {:keys => ["/Users/damianferrai/.ssh/da"]}
+set :ssh_options, {:keys => ["/Users/damianferrai/.ssh/da", "/Users/damianferrai/.ssh/ec2admin"]}
 set :ssh_options, {:forward_agent => true }
 set :ssh_options, {:verbose => :debug}
 
@@ -39,6 +37,26 @@ set :rvm_install_ruby_params, '1.9.3 --with-gcc=clang'      # for jruby/rbx defa
 #before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 #before 'deploy:setup', 'rvm:import_gemset' # import gemset from file
 
+after 'deploy:setup', 'copy_secret_files'
+after 'deploy:setup', 'precompile'
+after 'deploy:setup', 'restart_server'
+
+task :copy_secret_files, :role => :web do
+    # whatever you need to do
+    run "cp -f database.yml #{release_path}/config/database.yml"
+    run "cp -f aws.yml #{release_path}/config/aws.yml"
+    run "cp -f s3.yml #{release_path}/config/s3.yml"
+    
+end
+
+task :precompile, :role => :web do
+    run "cd #{release_path}/ && rake assets:precompile"
+end
+
+task :restart_server, :role => :web do
+    run "rvmsudo apachectl restart"
+end
+
 
 
 #############################################################
@@ -48,5 +66,5 @@ set :rvm_install_ruby_params, '1.9.3 --with-gcc=clang'      # for jruby/rbx defa
 set :repository, "git@github.com:dalef84/frasespapales.git"  # Your clone URL
 set :scm, :git
 set :branch, "master"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 
