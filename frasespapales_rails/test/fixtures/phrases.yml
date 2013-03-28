@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  text: MyString
+  votes: 1
+  created_date: 2013-03-28
+  origin: MyString
+
+two:
+  text: MyString
+  votes: 1
+  created_date: 2013-03-28
+  origin: MyString

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Text:</b>
+  <%= @phrase.text %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= @phrase.votes %>
+</p>
+
+<p>
+  <b>Created date:</b>
+  <%= @phrase.created_date %>
+</p>
+
+<p>
+  <b>Origin:</b>
+  <%= @phrase.origin %>
+</p>
+
+
+<%= link_to 'Edit', edit_phrase_path(@phrase) %> |
+<%= link_to 'Back', phrases_path %>

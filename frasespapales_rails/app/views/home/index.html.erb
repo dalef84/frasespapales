@@ -64,7 +64,7 @@ h3 {
 </style>
 <% content_for :title, "Title for specific page" %>
 <div id="container">
-    <div id="header"></div>
+    <div id="header"><%= link_to "My Phrases", phrases_path %><%= @showPhraseCount %></div>
     <div id="body">
         <h3 class="margin-bottom:-15px;">Ahora que el Papa es argentino,</h3>
         <h1><%= @showText %></h1>
@@ -85,7 +85,7 @@ h3 {
         <%= link_to('?', '#', :class => "btn popover-with-html", :title => "Sobre Frases Papales", :"data-placement"=>"top") %>
         </>
         <div id="popover_content_wrapper" style="display: none;">
-            <div id="disclaimer">Este sitio fue realizado mediante Ruby on Rails con fines de aprendizaje y las frases no expresan la visión del autor bajo ninguna forma, ya que fueron recopiladas de distintos medios. Todos los derechos reservados.
+            <div id="disclaimer">Este sitio fue realizado utilizando Ruby on Rails con fines de aprendizaje. Las frases que se muestran fueron recopiladas de distintos medios y no expresan la visión del autor. Todos los derechos reservados.
             </div>
         </div>
     </div>

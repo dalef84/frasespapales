@@ -51,6 +51,7 @@ Ahoraqueelpapaesargentino::Application.routes.draw do
   # just remember to delete public/index.html.
     root :to => 'home#index'
     resources :frase, :only => [:new, :create]
+    resources :phrases
 
   # See how all your routes lay out with "rake routes"
 
