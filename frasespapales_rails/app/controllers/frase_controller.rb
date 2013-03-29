@@ -4,16 +4,20 @@ class FraseController < ApplicationController
   end
     
   def create
-    nuevasFrasesFileName = "nuevasFrases.txt"
-      
-    # TODO add frase to DB
-    fraseText = params[:text]
-    if fraseText != nil && fraseText.length > 5
-        File.open(nuevasFrasesFileName, 'a') do |file|
-            file.puts(fraseText)
-        end
+      # TODO add model validation
+    phraseText = params[:text]
+    if phraseText != nil && phraseText.length > 5
+        Phrase.create(
+              created_date: DateTime.now,
+              origin: "Website",
+              text: phraseText
+        )
+        logger.debug "Created #{phraseText} phrase."
     end
     
     redirect_to :back
+  rescue  Exception => e
+      logger.debug "Error creating phrase. #{e}!"
+      redirect_to :back
   end
 end

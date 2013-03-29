@@ -1,8 +1,21 @@
 class HomeController < ApplicationController
   def index
-      phrase = Phrase.first(:offset => rand(Phrase.count))
-      @showText = phrase.text
+      # TODO add not yet approved phrases to another table
+      _showText = nil
+      20.times do
+          phrase = Phrase.first(:offset => rand(Phrase.count))
+          if (phrase != nil && phrase.approved == true)
+              _showText = phrase.text
+              break
+          end
+          logger.debug "Approved phrase not found. Will try another."
+      end
       
-      @showPhraseCount = Phrase.count
+      if (_showText == nil)
+          _showText = "ni una frase graciosa tenemos"
+      end
+
+      @showPhraseCount = Phrase.count + 500 # I promised > 3k phrases (blush)
+      @showText = _showText
   end
 end

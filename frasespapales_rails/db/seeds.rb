@@ -32,7 +32,7 @@ begin
               created_date: DateTime.now,
               origin: "Twitter",
               text: frase,
-              votes: 0
+              approved: true,
             )
         end
     end

@@ -2,7 +2,6 @@ require 'fileutils'
 
 begin
     text = "Ahora que el papa es argentino"
-    searchText = "\"#{text}\""
     rawFileName = "frasesRaw.txt"
     curatedFileName = "frases.txt"
     curatedFileName2 = "rails/ahoraqueelpapaesargentino/frases.txt"

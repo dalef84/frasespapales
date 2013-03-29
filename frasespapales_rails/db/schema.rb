@@ -14,12 +14,15 @@
 ActiveRecord::Schema.define(:version => 20130328031225) do
 
   create_table "phrases", :force => true do |t|
-    t.string   "text"
-    t.integer  "votes"
+    t.string   "text",                            :null => false
+    t.integer  "votes",        :default => 0
     t.datetime "created_date"
     t.string   "origin"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.boolean  "approved",     :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
+
+  add_index "phrases", ["text"], :name => "index_phrases_on_text", :unique => true
 
 end
