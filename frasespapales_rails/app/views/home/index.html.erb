@@ -4,19 +4,20 @@ html,body {
 }
 body {
   background-color: white;
-  font-size: 150%;
+  font-size: 100%;
   background-image: url('assets/vatican_flag.jpg');
   background-size: 100% auto;
 }
 h1 {
-  font-size: 250%;
+  font-size: 300%;
   text-align: center;
-  margin:10px;
+  margin:1%;
   line-height: 100%;
 }
 h3 {
-  font-size: 125%;
+  font-size: 200%;
   text-align: center;
+  line-height: 100%;
 }
 .align-center {
   text-align:center;
@@ -30,41 +31,60 @@ h3 {
    position:relative;
 }
 #header {
-   font-size: 65%;
-   padding-right: 10px;
-   padding-top: 10px;
+   padding-right: 1%;
+   padding-top: 1%;
 }
 #body {
-   padding-bottom:80px;   /* Height of the footer */
+   padding-bottom:15%;   /* Height of the footer */
 }
 #footer {
    position:absolute;
-   bottom:20px;
+   bottom:4%;
    width:100%;
-   height:60px;   /* Height of the footer */
+   height:14%;   /* Height of the footer */
 }
 #footer div.left {
  float: left; 
   margin-left:5%;
-  font-size: 65%;
 }
 #footer div.right {
  float: right; 
  margin-right:5%;
- margin-top:30px;
+ margin-top:3%;
 }
 .margin-top-bottom {
- margin-top: 20px;
- margin-bottom: 10px;
+ margin-top: 2%;
+ margin-bottom: 1%;
 }
 #disclaimer {
-  font-size:65%;
-}
-#sobreMi {
-  font-size:100%;
+  font-size:75%;
 }
 .popover {
-	width: 125px;
+	width: 20%;
+}
+
+.popover.top {
+    margin-left: -8%;
+}
+
+.popover.top .arrow {
+    margin-left: +35%;
+}
+
+@media only screen and (max-width: 450px) {
+  body {
+    font-size: 40%;
+    background-size: 112% auto;
+  }
+  #disclaimer {
+    font-size:50%;
+  }
+  .popover {
+	width: 40%;
+  }
+  #footer {
+   bottom:12%;
+  }
 }
 
 </style>
@@ -96,7 +116,7 @@ h3 {
             </div>
         </div>
         <div class="right">
-        <%= link_to('?', '#', :class => "btn popover-with-html", :title => "Sobre Frases Papales", :"data-placement"=>"top") %>
+            <%= link_to('?', '#', :class => "btn popover-with-html", :title => "Sobre Frases Papales", :"data-placement"=>"top") %>
         </div>
         <div id="popover_content_wrapper" style="display: none;">
             <div id="disclaimer">Este sitio fue realizado utilizando Ruby on Rails con fines de aprendizaje. Las frases que se muestran fueron recopiladas de distintos medios y no expresan la visión del autor. Todos los derechos reservados.
