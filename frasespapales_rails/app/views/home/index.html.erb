@@ -76,14 +76,15 @@ h3 {
     <div id="body">
         <h3 class="margin-bottom:-15px;">Ahora que el Papa es argentino,</h3>
         <h1><%= @showText %></h1>
-            <%= form_tag :controller => :phrases, :action => :create, :method => :post, :align => :center  do %>
-        <div class="align-center margin-top-bottom">
-            <%= text_field_tag 'text', '', :class => "input-xxlarge", :placeholder => "Sugerí tu frase acá" %>
-        </div>
-        <div class="align-center">
-            <%= submit_tag "      Sugerir      ", class:"btn btn-success"  %>
-            <%= submit_tag "      Otra frase      ", class:"btn"  %>
-        </div>
+        <%= form_tag :controller => :phrases, :action => :create, :method => :post, :align => :center  do %>
+            <div class="align-center margin-top-bottom">
+                <%= text_field_tag 'text', '', :class => "input-xxlarge", :placeholder => "Sugerí tu frase acá" %>
+            </div>
+            <div class="align-center">
+                <%= submit_tag "      Sugerir      ", class:"btn btn-success"  %>
+                <%= submit_tag "      Otra frase      ", class:"btn"  %>
+            </div>
+        <% end %>
     </div>
     <div id="footer">
         <div class="left">
@@ -103,4 +104,3 @@ h3 {
         </div>
     </div>
 </div>
-<% end %>
