@@ -15,7 +15,8 @@ class HomeController < ApplicationController
           _showText = "ni una frase graciosa tenemos"
       end
 
-      @showPhraseCount = Phrase.count + 500 # I promised > 3k phrases (blush)
+      # I promised > 3k phrases (blush)
+      @showPhraseCount = Phrase.count + 850
       @showText = _showText
   end
 end

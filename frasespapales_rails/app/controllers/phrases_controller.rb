@@ -39,7 +39,7 @@ class PhrasesController < ApplicationController
 
   # POST /phrases
   # POST /phrases.json
-  def create
+  def createFull
     @phrase = Phrase.new(params[:phrase])
 
     respond_to do |format|
@@ -53,7 +53,7 @@ class PhrasesController < ApplicationController
     end
   end
 
-  def createWithText
+  def create
       # TODO add model validation
     phraseText = params[:text]
     if phraseText != nil && phraseText.length > 5
@@ -65,6 +65,7 @@ class PhrasesController < ApplicationController
         logger.debug "Created #{phraseText} phrase."
     end
     
+    # TODO fix this
     redirect_to :back
   rescue  Exception => e
       logger.debug "Error creating phrase. #{e}!"

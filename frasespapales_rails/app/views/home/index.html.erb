@@ -1,5 +1,5 @@
 <style type="text/css">
-html,body{
+html,body {
   height: 100%;
 }
 
@@ -20,6 +20,9 @@ h3 {
 .align-center {
  text-align:center;
 }
+.align-right {
+ text-align:right;
+}
 
 #container {
    min-height:100%;
@@ -28,7 +31,9 @@ h3 {
   background-size: 100% auto;
 }
 #header {
-   padding:10px;
+   font-size: 50%;
+   padding-right: 20px;
+   padding-top: 20px;
 }
 #body {
    padding:10px;
@@ -64,11 +69,13 @@ h3 {
 </style>
 <% content_for :title, "Title for specific page" %>
 <div id="container">
-    <div id="header"><%= link_to "My Phrases", phrases_path %><%= @showPhraseCount %></div>
+    <div id="header">
+        <div class="align-right">#Frases: <%= @showPhraseCount %></div>
+    </div>
     <div id="body">
         <h3 class="margin-bottom:-15px;">Ahora que el Papa es argentino,</h3>
         <h1><%= @showText %></h1>
-            <%= form_tag :controller => :frase, :action => :create, :method => :post, :align => :center  do %>
+            <%= form_tag :controller => :phrases, :action => :create, :method => :post, :align => :center  do %>
         <div class="align-center margin-top-bottom">
             <%= text_field_tag 'text', '', :class => "input-xxlarge", :placeholder => "Sugerí tu frase acá" %>
         </div>
